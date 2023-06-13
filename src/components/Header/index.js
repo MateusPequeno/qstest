@@ -16,7 +16,6 @@ import {
 import { AiOutlineMenu } from "react-icons/ai";
 
 const HeaderComponent = ({ bannerImage }) => {
-  console.log(bannerImage);
   const [selectedOption, setSelectedOption] = useState("Menu");
   const [mobileDevice, setMobileDevice] = useState(false);
 

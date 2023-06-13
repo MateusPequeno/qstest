@@ -26,7 +26,7 @@ export const TextButton = styled.button`
   height: 52px;
   background-color: ${Colors.primaryBrown};
   cursor: pointer;
-  @media (max-width: 800px) {
+  @media (max-width: 768px) {
     border-bottom: "none";
     height: 64px;
     padding: 14px 16px;
@@ -73,7 +73,10 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  max-width: 100%;
   width: 100%;
-  max-height: 100%;
+  height: 150px;
+  @media (max-width: 768px) {
+    object-fit: cover;
+    object-position: center;
+  }
 `;

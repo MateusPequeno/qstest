@@ -1,6 +1,25 @@
 import HeaderComponent from "components/Header";
 import React, { useEffect, useState } from "react";
 import { apiRestaurant } from "services";
+import {
+  ClickableItem,
+  MenuContainer,
+  ItemIcon,
+  ItemImage,
+  Container,
+  ItemText,
+  SearchBarDiv,
+  WrapDiv,
+  MainContentDiv,
+  FullScreenDiv,
+  CenteredDiv,
+  CardDiv,
+  Carousel,
+  CartContainer,
+  ItemTextDiv,
+} from "./styles";
+import SearchBar from "components/SearchBar";
+import { styled } from "styled-components";
 
 const Home = () => {
   const [menuData, setMenuData] = useState({});
@@ -36,49 +55,38 @@ const Home = () => {
   return (
     <>
       <HeaderComponent bannerImage={businessData?.webSettings?.bannerImage} />
-      <div
-        style={{
-          justifyContent: "space-between",
-          display: "flex",
-          padding: 20,
-        }}
-      >
-        {menuData?.sections?.map((item) => (
-          <div
-            key={item?.id}
-            onClick={() => handleItemClick(item?.id)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "10px",
-              cursor: "pointer",
-              borderBottom:
-                selectedItemId === item?.id ? "2px solid black" : "none",
-            }}
-          >
-            <div
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-                overflow: "hidden",
-                marginRight: "10px",
-              }}
-            >
-              <img
-                src={item?.images[0]?.image}
-                alt="Food"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-            <span>{item?.name}</span>
-          </div>
-        ))}
-      </div>
+      <FullScreenDiv>
+        <SearchBarDiv>
+          <SearchBar />
+        </SearchBarDiv>
+        <CenteredDiv>
+          <CardDiv>
+            <MenuContainer>
+              <Carousel>
+                {menuData?.sections?.map((item) => (
+                  <ClickableItem
+                    key={item?.id}
+                    onClick={() => handleItemClick(item?.id)}
+                    selected={selectedItemId === item?.id}
+                  >
+                    <ItemIcon selected={selectedItemId === item?.id}>
+                      <ItemImage src={item?.images[0]?.image} alt="Food" />
+                    </ItemIcon>
+                    <ItemTextDiv>
+                      <ItemText selected={selectedItemId === item?.id}>
+                        {item?.name}
+                      </ItemText>
+                    </ItemTextDiv>
+                  </ClickableItem>
+                ))}
+              </Carousel>
+            </MenuContainer>
+            {/*       <CartContainer>
+              <ItemText>Carrinho</ItemText>
+            </CartContainer> */}
+          </CardDiv>
+        </CenteredDiv>
+      </FullScreenDiv>
     </>
   );
 };
