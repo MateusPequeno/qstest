@@ -6,7 +6,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${Colors.primaryBrown};
+  background-color: ${Colors.primaryColor};
 `;
 
 export const Nav = styled.nav`
@@ -24,7 +24,7 @@ export const TextButton = styled.button`
   padding: 14px 0px 0px;
   width: 232px;
   height: 52px;
-  background-color: ${Colors.primaryBrown};
+  background-color: ${Colors.primaryColor};
   cursor: pointer;
   @media (max-width: 768px) {
     border-bottom: "none";
@@ -45,7 +45,7 @@ export const HeaderText = styled.text`
 export const MenuIconContainer = styled.div``;
 
 export const TextButtonMob = styled.button`
-  background-color: ${Colors.primaryBrown};
+  background-color: ${Colors.primaryColor};
   border: none;
   cursor: pointer;
 `;
@@ -56,13 +56,13 @@ export const HeaderMobile = styled.header`
   align-items: center;
   height: 64px;
   padding: 10px;
-  background-color: ${Colors.primaryBrown};
+  background-color: ${Colors.primaryColor};
 `;
 
 export const BackIcon = styled(BiArrowBack).attrs({
   size: 28,
 })`
-  color: ${Colors.primaryBrown};
+  color: ${Colors.primaryColor};
 `;
 
 export const ImageContainer = styled.div`

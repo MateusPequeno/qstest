@@ -1,55 +1,73 @@
+import React, { useContext, useEffect, useState, memo } from "react";
 import HeaderComponent from "components/Header";
-import React, { useEffect, useState } from "react";
-import { apiRestaurant } from "services";
+import CarouselComponent from "components/Carousel";
+import SearchBar from "components/SearchBar";
 import {
-  ClickableItem,
+  determineWhichPriceToShow,
+  formatCurrency,
+} from "../../utils/index.js";
+import { apiRestaurant } from "services";
+import { BasketContext } from "contexts/Basket";
+import {
   MenuContainer,
-  ItemIcon,
-  ItemImage,
-  Container,
-  ItemText,
   SearchBarDiv,
-  WrapDiv,
-  MainContentDiv,
   FullScreenDiv,
   CenteredDiv,
-  CardDiv,
-  Carousel,
-  CartContainer,
-  ItemTextDiv,
+  WhiteBackgroundDiv,
+  ColapserDiv,
+  ArrowDownIcon,
+  ColapserText,
+  IconButton,
+  MenuItemContainer,
+  MenuItemImage,
+  LeftBox,
+  DescriptionText,
+  ItemNameText,
+  PriceText,
+  MenuItemImageDiv,
+  NumberBox,
+  NumberText,
+  TextAndNumberDiv,
+  ThinBorderBox,
+  AllergyInfoText,
+  FloatingFooter,
+  RoundedButton,
+  ButtonText,
 } from "./styles";
-import SearchBar from "components/SearchBar";
-import { styled } from "styled-components";
 
 const Home = () => {
+  const { basket, addToBasket } = useContext(BasketContext);
+  console.log("basket", basket);
+
   const [menuData, setMenuData] = useState({});
+  const [menuSection, setMenuSection] = useState([]);
   const [businessData, setBusinessData] = useState({});
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [arrowIconState, setArrowIconState] = useState(false);
   const handleItemClick = (itemId) => {
     setSelectedItemId(itemId);
   };
   useEffect(() => {
-    const fetchBusinessDetails = async () => {
+    const fetchData = async () => {
       try {
-        const response = await apiRestaurant.getBusinessDetails();
-        console.log("response", response);
-        setBusinessData(response);
+        const [businessDetails, menuDetails] = await Promise.all([
+          apiRestaurant.getBusinessDetails(),
+          apiRestaurant.getMenuDetails(),
+        ]);
+
+        console.log("Business details:", businessDetails);
+        console.log("Menu details:", menuDetails);
+
+        setBusinessData(businessDetails);
+        setMenuData(menuDetails);
+        setSelectedItemId(menuDetails?.sections[0]?.id);
+        setMenuSection(menuDetails?.sections);
       } catch (error) {
-        console.log("::fetchBusinessDetails::ERROR::", error);
+        console.log("::fetchData::ERROR::", error);
       }
     };
-    const fetchMenuDetails = async () => {
-      try {
-        const response = await apiRestaurant.getMenuDetails();
 
-        setMenuData(response);
-      } catch (error) {
-        console.log("::fetchMenuDetails::ERROR::", error);
-      }
-    };
-
-    fetchBusinessDetails();
-    fetchMenuDetails();
+    fetchData();
   }, []);
 
   return (
@@ -60,35 +78,91 @@ const Home = () => {
           <SearchBar />
         </SearchBarDiv>
         <CenteredDiv>
-          <CardDiv>
+          <WhiteBackgroundDiv>
             <MenuContainer>
-              <Carousel>
-                {menuData?.sections?.map((item) => (
-                  <ClickableItem
-                    key={item?.id}
-                    onClick={() => handleItemClick(item?.id)}
-                    selected={selectedItemId === item?.id}
-                  >
-                    <ItemIcon selected={selectedItemId === item?.id}>
-                      <ItemImage src={item?.images[0]?.image} alt="Food" />
-                    </ItemIcon>
-                    <ItemTextDiv>
-                      <ItemText selected={selectedItemId === item?.id}>
-                        {item?.name}
-                      </ItemText>
-                    </ItemTextDiv>
-                  </ClickableItem>
+              <CarouselComponent
+                menuData={menuData}
+                selectedItemId={selectedItemId}
+                handleItemClick={handleItemClick}
+              />
+              {menuSection
+                ?.filter((menuSection) => menuSection?.visible === 1)
+                .map((menuSection) => (
+                  <>
+                    <ColapserDiv>
+                      <ColapserText>{menuSection?.name}</ColapserText>
+                      <IconButton
+                        shouldRotate={arrowIconState}
+                        onClick={() => setArrowIconState(!arrowIconState)}
+                      >
+                        <ArrowDownIcon />
+                      </IconButton>
+                    </ColapserDiv>
+
+                    {menuSection?.items.map((sectionItem, index) => (
+                      <MenuItemContainer
+                        key={index.toString()}
+                        onClick={() => {
+                          addToBasket(sectionItem);
+                        }}
+                      >
+                        <LeftBox>
+                          <TextAndNumberDiv>
+                            {basket.filter(
+                              (item) => item.name === sectionItem.name
+                            ).length > 0 && (
+                              <NumberBox>
+                                <NumberText>
+                                  {
+                                    basket.filter(
+                                      (item) => item.name === sectionItem.name
+                                    ).length
+                                  }
+                                </NumberText>
+                              </NumberBox>
+                            )}
+                            <ItemNameText>{sectionItem?.name}</ItemNameText>
+                          </TextAndNumberDiv>
+                          <DescriptionText>
+                            {sectionItem?.description}
+                          </DescriptionText>
+                          <PriceText>
+                            {determineWhichPriceToShow(sectionItem)}
+                          </PriceText>
+                        </LeftBox>
+                        {sectionItem?.images?.length > 0 && (
+                          <MenuItemImageDiv>
+                            <MenuItemImage
+                              src={sectionItem?.images[0]?.image}
+                              alt="Item"
+                            />
+                          </MenuItemImageDiv>
+                        )}
+                      </MenuItemContainer>
+                    ))}
+                  </>
                 ))}
-              </Carousel>
             </MenuContainer>
+            <ThinBorderBox>
+              <AllergyInfoText>View allergy information</AllergyInfoText>
+            </ThinBorderBox>
+            {basket?.length > 0 && (
+              <FloatingFooter>
+                <RoundedButton>
+                  <ButtonText>
+                    Your basket &bull; {basket?.length} item
+                  </ButtonText>
+                </RoundedButton>
+              </FloatingFooter>
+            )}
             {/*       <CartContainer>
               <ItemText>Carrinho</ItemText>
             </CartContainer> */}
-          </CardDiv>
+          </WhiteBackgroundDiv>
         </CenteredDiv>
       </FullScreenDiv>
     </>
   );
 };
 
-export default Home;
+export default memo(Home);
