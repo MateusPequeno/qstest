@@ -1,4 +1,3 @@
-import { Colors } from "config/colors";
 import styled from "styled-components";
 
 export const Carousel = styled.div`
@@ -13,8 +12,7 @@ export const ClickableItem = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: ${(props) =>
-    props.selected ? `2px solid ${Colors.primaryColor}` : "none"};
-
+    props.selected ? `2px solid ${props.theme.backgroundColour}` : "none"};
   padding-bottom: 24px;
 `;
 
@@ -27,7 +25,7 @@ export const ItemIcon = styled.div`
   align-items: center;
   justify-content: center;
   border: ${(props) =>
-    props.selected ? `2px solid ${Colors.primaryColor}` : "none"};
+    props.selected ? `2px solid ${props.theme.primaryColour}` : "none"};
   @media (max-width: 768px) {
     width: 80px;
     height: 80px;

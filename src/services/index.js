@@ -14,7 +14,7 @@ export const apiRestaurant = {
         }
       );
       console.log("::getMenuDetails::REQ", req);
-      const json = await req.json();
+      let json = await req.json();
       return json;
     } catch (error) {
       console.error("::getMenuDetails::ERROR", error);

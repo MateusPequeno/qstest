@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  AuxTextDiv,
   BackIcon,
   Header,
   HeaderMobile,
@@ -8,7 +7,6 @@ import {
   Image,
   ImageContainer,
   MenuIconContainer,
-  MobileNav,
   Nav,
   TextButton,
   TextButtonMob,
