@@ -16,7 +16,7 @@ export const IconButton = styled.button`
   padding: 5px;
   border: none;
   background-color: white;
-  transform: ${(props) => (props.shouldRotate ? `rotate(-180deg)` : null)};
+  transform: ${(props) => (props.shouldrotate ? `rotate(-180deg)` : null)};
 `;
 export const ArrowDownIcon = styled(AiOutlineDown).attrs({
   size: 24,

@@ -18,6 +18,7 @@ import {
 import Colapser from "components/Colapser/index.js";
 import MenuItemCard from "components/MenuItemCard/index.js";
 import FloatingFooterButton from "components/FloatingFooterButton/index.js";
+import Modal from "components/Modal";
 
 const Home = () => {
   const { basket } = useContext(BasketContext);
@@ -27,12 +28,17 @@ const Home = () => {
   const [menuSection, setMenuSection] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [arrowIconState, setArrowIconState] = useState(false);
+  const [modalState, setModalState] = useState(false);
+  const [modalData, setModalData] = useState({});
   const handleItemClick = (itemId) => {
     setSelectedItemId(itemId);
   };
-  const handleArrowClick = (value) => {
-    console.log(value);
+  const handleArrowClick = () => {
     setArrowIconState(!arrowIconState);
+  };
+  const handleMenuItemClick = (item) => {
+    setModalData(item);
+    setModalState(true);
   };
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -72,11 +78,12 @@ const Home = () => {
                   <>
                     <Colapser
                       menuSection={menuSection}
-                      shouldRotate={arrowIconState}
+                      shouldrotate={arrowIconState}
                       onClick={handleArrowClick}
                     />
                     {menuSection?.items.map((sectionItem, index) => (
                       <MenuItemCard
+                        handleMenuItemClick={handleMenuItemClick}
                         key={index?.toString()}
                         index={index}
                         sectionItem={sectionItem}
@@ -88,7 +95,24 @@ const Home = () => {
             <ThinBorderBox>
               <AllergyInfoText>View allergy information</AllergyInfoText>
             </ThinBorderBox>
-            {basket?.length > 0 && <FloatingFooterButton basket={basket} />}
+            {modalState && (
+              <Modal
+                modalData={modalData}
+                onClose={() => {
+                  setModalState(false);
+                  setModalData({});
+                }}
+              />
+            )}
+            {basket?.length > 0 && (
+              <FloatingFooterButton
+                active={true}
+                buttonText={`Your basket  \u2022 ${basket?.length} ${
+                  basket?.length === 1 ? "item" : "items"
+                }`}
+                basket={basket}
+              />
+            )}
             {/*       <CartContainer>
               <ItemText>Carrinho</ItemText>
             </CartContainer> */}

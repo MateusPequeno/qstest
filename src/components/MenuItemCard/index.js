@@ -14,13 +14,13 @@ import { MenuItemImage } from "pages/Home/styles";
 import { determineWhichPriceToShow } from "utils";
 import { BasketContext } from "contexts/Basket";
 
-const MenuItemCard = ({ sectionItem, index }) => {
+const MenuItemCard = ({ sectionItem, index, handleMenuItemClick }) => {
   const { basket, addToBasket } = useContext(BasketContext);
   return (
     <MenuItemContainer
       key={index.toString()}
       onClick={() => {
-        addToBasket(sectionItem);
+        handleMenuItemClick(sectionItem);
       }}
     >
       <LeftBox>

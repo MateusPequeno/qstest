@@ -12,7 +12,7 @@ export const ClickableItem = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: ${(props) =>
-    props.selected ? `2px solid ${props.theme.backgroundColour}` : "none"};
+    props.selected ? `2px solid ${props.theme.primaryColour}` : "none"};
   padding-bottom: 24px;
 `;
 
