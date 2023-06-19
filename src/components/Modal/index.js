@@ -13,6 +13,7 @@ import {
   Card,
   ChoicesContainer,
   CloseButton,
+  CloseButtonDiv,
   ColumnDiv,
   CustomButtonContainer,
   FooterDiv,
@@ -31,7 +32,6 @@ import {
 
 const Modal = ({ onClose, modalData }) => {
   const { addToBasket } = useContext(BasketContext);
-  console.log("dddd", modalData);
   const [selectedModifier, setSelectedModifier] = useState(0);
   const [itemQuantity, setItemQuantity] = useState(1);
 

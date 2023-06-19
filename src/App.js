@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { WebSettingsProvider } from "./contexts/WebSettings";
 import { BasketProvider } from "./contexts/Basket";
-import PublicRoutes from "./routes";
+import { WebSettingsContext } from "contexts/WebSettings.js";
 import { apiRestaurant } from "services";
+import PublicRoutes from "./routes";
 
 export default function App() {
+  /*  const { setWebSettingsState } = useContext(WebSettingsContext); */
   const [theme, setTheme] = useState({
     lightGray: "#8A94A4",
     gray: "#8A94A4",
@@ -23,7 +25,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchWebSettings = async () => {
       try {
         const businessDetails = await apiRestaurant.getBusinessDetails();
         setTheme((prevTheme) => ({
@@ -38,7 +40,7 @@ export default function App() {
         console.log("::fetchData::ERROR::", error);
       }
     };
-    fetchData();
+    fetchWebSettings();
   }, []);
 
   return (

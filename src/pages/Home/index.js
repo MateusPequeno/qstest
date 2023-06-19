@@ -14,15 +14,19 @@ import {
   WhiteBackgroundDiv,
   ThinBorderBox,
   AllergyInfoText,
+  CartContainer,
 } from "./styles";
 import Colapser from "components/Colapser/index.js";
 import MenuItemCard from "components/MenuItemCard/index.js";
 import FloatingFooterButton from "components/FloatingFooterButton/index.js";
 import Modal from "components/Modal";
 import BasketModal from "components/BasketModal";
+import BasketCardComponent from "components/BasketItemCard";
+import BasketCard from "components/BasketCard";
+import { formatCurrency } from "utils";
 
 const Home = () => {
-  const { basket } = useContext(BasketContext);
+  const { basket, removeFromBasket, setBasket } = useContext(BasketContext);
   const { webSettingsState } = useContext(WebSettingsContext);
 
   const [menuData, setMenuData] = useState({});
@@ -32,16 +36,64 @@ const Home = () => {
   const [modalState, setModalState] = useState(false);
   const [basketModal, setBasketModal] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [mobileDevice, setMobileDevice] = useState(false);
+
   const handleItemClick = (itemId) => {
     setSelectedItemId(itemId);
   };
+
   const handleArrowClick = () => {
     setArrowIconState(!arrowIconState);
   };
+
   const handleMenuItemClick = (item) => {
     setModalData(item);
     setModalState(true);
   };
+  const handleMinusClick = (basketItem) => {
+    if (basketItem.quantity === 1) {
+      removeFromBasket(basketItem);
+    } else {
+      setBasket((prevBasket) => {
+        const updatedBasket = prevBasket.map((item) => {
+          if (item.id === basketItem.id) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+          return item;
+        });
+        return updatedBasket;
+      });
+    }
+  };
+
+  const handlePlusClick = (basketItem) => {
+    setBasket((prevBasket) => {
+      const updatedBasket = prevBasket.map((item) => {
+        if (item.id === basketItem.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
+      return updatedBasket;
+    });
+  };
+  const calculateTotalPrice = (items) => {
+    const totalPrice = items.reduce((accumulator, currentItem) => {
+      let itemPrice = 0;
+      if (currentItem.selectedModifier) {
+        const basePrice = currentItem.price || 0;
+        const modifierPrice = currentItem.selectedModifier.price || 0;
+        itemPrice = (basePrice + modifierPrice) * currentItem.quantity;
+      } else {
+        itemPrice = (currentItem.price || 0) * currentItem.quantity;
+      }
+
+      return accumulator + itemPrice;
+    }, 0);
+
+    return formatCurrency(totalPrice);
+  };
+  const totalPrice = calculateTotalPrice(basket);
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
@@ -49,6 +101,11 @@ const Home = () => {
         setMenuData(menuDetails);
         setSelectedItemId(menuDetails?.sections[0]?.id);
         setMenuSection(menuDetails?.sections);
+        console.log(window.innerWidth);
+        if (window.innerWidth < 800) {
+          console.log("mobile");
+          setMobileDevice(true);
+        }
       } catch (error) {
         console.log("::fetchData::ERROR::", error);
       }
@@ -95,7 +152,9 @@ const Home = () => {
                 ))}
             </MenuContainer>
             <ThinBorderBox>
-              <AllergyInfoText>View allergy information</AllergyInfoText>
+              {mobileDevice && (
+                <AllergyInfoText>View allergy information</AllergyInfoText>
+              )}
             </ThinBorderBox>
             {modalState && (
               <Modal
@@ -108,13 +167,17 @@ const Home = () => {
             )}
             {basketModal && (
               <BasketModal
+                basket={basket}
+                totalPrice={totalPrice}
                 modalData={modalData}
+                handleMinusClick={handleMinusClick}
+                handlePlusClick={handlePlusClick}
                 onClose={() => {
                   setBasketModal(false);
                 }}
               />
             )}
-            {basket?.length > 0 && (
+            {mobileDevice && basket?.length > 0 && (
               <FloatingFooterButton
                 onClick={() => setBasketModal(true)}
                 active={true}
@@ -123,9 +186,16 @@ const Home = () => {
                 }`}
               />
             )}
-            {/*       <CartContainer>
-              <ItemText>Carrinho</ItemText>
-            </CartContainer> */}
+
+            {!mobileDevice && (
+              <BasketCard
+                basket={basket}
+                totalPrice={totalPrice}
+                modalData={modalData}
+                handleMinusClick={handleMinusClick}
+                handlePlusClick={handlePlusClick}
+              />
+            )}
           </WhiteBackgroundDiv>
         </CenteredDiv>
       </FullScreenDiv>

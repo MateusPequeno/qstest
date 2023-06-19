@@ -17,20 +17,9 @@ export const WrapDiv = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 `;
 
-export const MenuContainer = styled.div`
-  width: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  @media (max-width: 768px) {
-    box-shadow: 0 0 0px rgba(0, 0, 0, 0);
-    width: 100%;
-  }
-`;
-
 export const CartContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20;
-  width: 50%;
 `;
 
 export const MainContentDiv = styled.div`
@@ -43,6 +32,7 @@ export const FullScreenDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
   background-color: ${(props) => `${props.theme.backgroundColour}`};
 `;
 
@@ -57,6 +47,7 @@ export const CenteredDiv = styled.div`
 export const WhiteBackgroundDiv = styled.div`
   padding: 20px;
   display: flex;
+  background-color: ${(props) => `${props.theme.grayDefault}`};
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 0px;
@@ -120,4 +111,14 @@ export const AllergyInfoText = styled.text`
   font-size: 16px;
   text-decoration-line: underline;
   color: ${(props) => `${props.theme.primaryColour}`};
+`;
+
+export const MenuContainer = styled.div`
+  width: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: ${(props) => `${props.theme.white}`};
+  @media (max-width: 768px) {
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0);
+    width: 100%;
+  }
 `;

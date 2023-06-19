@@ -7,6 +7,8 @@ export const ModalContainer = styled.div`
   right: 0;
   bottom: 0;
   display: flex;
+  //align-items: center;
+  justify-content: center;
   overflow: auto;
   scrollbar-width: thin;
   z-index: 1;
@@ -25,15 +27,27 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  height: 720px;
+  padding-bottom: 10%;
+  padding-top: 3%;
   position: ${(props) => (props.pushtobottom ? "fixed" : "")};
   bottom: ${(props) => (props.pushtobottom ? "0" : "")};
   position: ${(props) => (props.pushtobottom ? "50%" : "")};
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0px;
+    padding-top: 0px;
+  }
 `;
+
 export const CloseButton = styled.button`
   position: absolute;
-  top: 35px;
-  right: 35px;
+  top: 8%;
+  right: 39%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,9 +61,25 @@ export const CloseButton = styled.button`
   border: none;
   color: ${(props) => props.theme.primaryColour};
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    /* Adjust the properties for smaller screens */
+    top: 5%;
+    right: 20%;
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 480px) {
+    /* Adjust the properties for even smaller screens */
+    top: 3%;
+    right: 10%;
+    width: 28px;
+    height: 28px;
+  }
 `;
 
-export const ModalHeader = styled.h2`
+export const ModalHeader = styled.text`
   font-family: "Roboto" sans-serif;
   font-style: normal;
   font-weight: 700;
