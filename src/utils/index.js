@@ -7,7 +7,7 @@ export function formatCurrency(value) {
 
   // Format the number with thousands separators and currency symbol
   const formattedCurrency =
-    "R$ " +
+    "R$" +
     formattedValue.replace(".", ",").replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
 
   return formattedCurrency;

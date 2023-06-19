@@ -19,6 +19,7 @@ import Colapser from "components/Colapser/index.js";
 import MenuItemCard from "components/MenuItemCard/index.js";
 import FloatingFooterButton from "components/FloatingFooterButton/index.js";
 import Modal from "components/Modal";
+import BasketModal from "components/BasketModal";
 
 const Home = () => {
   const { basket } = useContext(BasketContext);
@@ -29,6 +30,7 @@ const Home = () => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [arrowIconState, setArrowIconState] = useState(false);
   const [modalState, setModalState] = useState(false);
+  const [basketModal, setBasketModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const handleItemClick = (itemId) => {
     setSelectedItemId(itemId);
@@ -104,13 +106,21 @@ const Home = () => {
                 }}
               />
             )}
+            {basketModal && (
+              <BasketModal
+                modalData={modalData}
+                onClose={() => {
+                  setBasketModal(false);
+                }}
+              />
+            )}
             {basket?.length > 0 && (
               <FloatingFooterButton
+                onClick={() => setBasketModal(true)}
                 active={true}
                 buttonText={`Your basket  \u2022 ${basket?.length} ${
                   basket?.length === 1 ? "item" : "items"
                 }`}
-                basket={basket}
               />
             )}
             {/*       <CartContainer>

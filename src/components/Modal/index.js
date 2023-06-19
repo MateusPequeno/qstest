@@ -41,18 +41,18 @@ const Modal = ({ onClose, modalData }) => {
   const handleCustomButtonClick = (selectedModifier, onClose) => {
     const { modifiers, ...updatedModalData } = modalData;
     updatedModalData.quantity = itemQuantity;
-    updatedModalData.selectedModifier = selectedModifier;
+
+    if (selectedModifier) {
+      updatedModalData.selectedModifier = selectedModifier;
+    }
+
     onClose();
     addToBasket(updatedModalData);
   };
 
   return (
     <ModalContainer>
-      <ModalContent
-        pushtobottom={
-          !(modalData?.images?.length > 0 && modalData?.modifiers?.length > 0)
-        }
-      >
+      <ModalContent pushtobottom={modalData?.images?.length > 0 ? false : true}>
         <CloseButton onClick={onClose}>X</CloseButton>
         {modalData?.images?.length > 0 && (
           <ModalImage src={modalData?.images[0]?.image} alt="Modal Image" />

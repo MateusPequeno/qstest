@@ -27,12 +27,11 @@ export const PlusIcon = styled(AiFillPlusCircle).attrs({
 export const NumberText = styled.span`
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 29px;
 `;
 export const Container = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 10%;
   flex-direction: row;

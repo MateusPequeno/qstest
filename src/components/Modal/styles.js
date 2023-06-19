@@ -26,11 +26,10 @@ export const ModalContainer = styled.div`
 
 export const ModalContent = styled.div`
   width: 100%;
-  position: ${(props) => (props?.pushtobottom ? "fixed" : "relative")};
-
-  bottom: ${(props) => (props?.pushtobottom ? 0 : "none")};
+  position: ${(props) => (props.pushtobottom ? "fixed" : "")};
+  bottom: ${(props) => (props.pushtobottom ? "0" : "")};
+  position: ${(props) => (props.pushtobottom ? "50%" : "")};
 `;
-
 export const CloseButton = styled.button`
   position: absolute;
   top: 35px;
