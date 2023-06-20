@@ -1,6 +1,8 @@
 import React from "react";
-import { ButtonText, RoundedButton } from "./styles";
+import PropTypes from "prop-types";
 import { useTheme } from "styled-components";
+
+import { ButtonText, RoundedButton } from "./styles";
 
 const CustomButton = ({ buttonText, active, onClick }) => {
   const theme = useTheme();
@@ -14,5 +16,10 @@ const CustomButton = ({ buttonText, active, onClick }) => {
       <ButtonText active={active}>{buttonText}</ButtonText>
     </RoundedButton>
   );
+};
+CustomButton.propTypes = {
+  buttonText: PropTypes.string,
+  active: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 export default CustomButton;

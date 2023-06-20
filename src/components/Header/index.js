@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
+import PropTypes from "prop-types";
+
 import {
   BackIcon,
   Header,
@@ -11,16 +14,13 @@ import {
   TextButton,
   TextButtonMob,
 } from "./styles";
-import { AiOutlineMenu } from "react-icons/ai";
 
 const HeaderComponent = ({ bannerImage }) => {
   const [selectedOption, setSelectedOption] = useState("Menu");
   const [mobileDevice, setMobileDevice] = useState(false);
 
   useEffect(() => {
-    console.log(window.innerWidth);
     if (window.innerWidth < 800) {
-      console.log("mobile");
       setMobileDevice(true);
     }
   }, []);
@@ -31,19 +31,19 @@ const HeaderComponent = ({ bannerImage }) => {
         <Header>
           <Nav>
             <TextButton
-              is_selected={selectedOption === "Menu" ? 'true' : 'false'}
+              is_selected={selectedOption === "Menu" ? "true" : "false"}
               onClick={() => setSelectedOption("Menu")}
             >
               <HeaderText>MENU</HeaderText>
             </TextButton>
             <TextButton
-              is_selected={selectedOption === "Enter" ? 'true' : 'false'}
+              is_selected={selectedOption === "Enter" ? "true" : "false"}
               onClick={() => setSelectedOption("Enter")}
-            > 
+            >
               <HeaderText>ENTRAR</HeaderText>
             </TextButton>
             <TextButton
-              is_selected={selectedOption === "Contact" ? 'true' : 'false'}
+              is_selected={selectedOption === "Contact" ? "true" : "false"}
               onClick={() => setSelectedOption("Contact")}
             >
               <HeaderText>CONTATO</HeaderText>
@@ -54,7 +54,7 @@ const HeaderComponent = ({ bannerImage }) => {
         <HeaderMobile>
           <BackIcon />
           <TextButtonMob
-            is_selected={selectedOption === "Menu" ? 'true' : 'false'}
+            is_selected={selectedOption === "Menu" ? "true" : "false"}
             onClick={() => setSelectedOption("Menu")}
           >
             <HeaderText>MENU</HeaderText>
@@ -69,6 +69,10 @@ const HeaderComponent = ({ bannerImage }) => {
       </ImageContainer>
     </>
   );
+};
+
+HeaderComponent.propTypes = {
+  bannerImage: PropTypes.string,
 };
 
 export default HeaderComponent;

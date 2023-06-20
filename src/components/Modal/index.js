@@ -1,4 +1,6 @@
 import React, { memo, useContext, useState } from "react";
+import PropTypes from "prop-types";
+
 import {
   determineButtonActivity,
   formatCurrency,
@@ -37,6 +39,7 @@ const Modal = ({ onClose, modalData }) => {
     setSelectedModifier(modifierItem);
   };
   const handleCustomButtonClick = (selectedModifier, onClose) => {
+    // eslint-disable-next-line no-unused-vars
     const { modifiers, ...updatedModalData } = modalData;
     updatedModalData.quantity = itemQuantity;
 
@@ -95,7 +98,6 @@ const Modal = ({ onClose, modalData }) => {
               setItemQuantity(itemQuantity - 1);
             }}
             onPlusClick={(itemQuantity) => {
-              console.log(itemQuantity);
               setItemQuantity(itemQuantity + 1);
             }}
             number={itemQuantity}
@@ -118,6 +120,18 @@ const Modal = ({ onClose, modalData }) => {
       </ModalContent>
     </ModalContainer>
   );
+};
+
+Modal.propTypes = {
+  modalData: PropTypes.shape({
+    images: PropTypes.array,
+    image: PropTypes.any,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    modifiers: PropTypes.array,
+    price: PropTypes.number,
+  }),
+  onClose: PropTypes.node.isRequired,
 };
 
 export default memo(Modal);

@@ -2,10 +2,18 @@ import React, { useContext, useEffect, useState, memo } from "react";
 import HeaderComponent from "components/Header";
 import CarouselComponent from "components/Carousel";
 import SearchBar from "components/SearchBar";
+import Colapser from "components/Colapser/index.js";
+import MenuItemCard from "components/MenuItemCard/index.js";
+import FloatingFooterButton from "components/FloatingFooterButton/index.js";
+import Modal from "components/Modal";
+import BasketModal from "components/BasketModal";
+import BasketCard from "components/BasketCard";
 
 import { apiRestaurant } from "services";
 import { BasketContext } from "contexts/Basket";
 import { WebSettingsContext } from "contexts/WebSettings.js";
+
+import { formatCurrency } from "utils";
 import {
   MenuContainer,
   SearchBarDiv,
@@ -14,16 +22,7 @@ import {
   WhiteBackgroundDiv,
   ThinBorderBox,
   AllergyInfoText,
-  CartContainer,
 } from "./styles";
-import Colapser from "components/Colapser/index.js";
-import MenuItemCard from "components/MenuItemCard/index.js";
-import FloatingFooterButton from "components/FloatingFooterButton/index.js";
-import Modal from "components/Modal";
-import BasketModal from "components/BasketModal";
-import BasketCardComponent from "components/BasketItemCard";
-import BasketCard from "components/BasketCard";
-import { formatCurrency } from "utils";
 
 const Home = () => {
   const { basket, removeFromBasket, setBasket } = useContext(BasketContext);
@@ -102,9 +101,7 @@ const Home = () => {
         setMenuData(menuDetails);
         setSelectedItemId(menuDetails?.sections[0]?.id);
         setMenuSection(menuDetails?.sections);
-        console.log(window.innerWidth);
         if (window.innerWidth < 800) {
-          console.log("mobile");
           setMobileDevice(true);
         }
       } catch (error) {

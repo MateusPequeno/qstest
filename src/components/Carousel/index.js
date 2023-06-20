@@ -1,4 +1,7 @@
 import React from "react";
+import { useTheme } from "styled-components";
+import PropTypes from "prop-types";
+
 import {
   Carousel,
   ClickableItem,
@@ -7,7 +10,6 @@ import {
   ItemText,
   ItemTextDiv,
 } from "./styles";
-import { useTheme } from "styled-components";
 
 const CarouselComponent = ({ menuData, handleItemClick, selectedItemId }) => {
   const theme = useTheme();
@@ -32,6 +34,14 @@ const CarouselComponent = ({ menuData, handleItemClick, selectedItemId }) => {
       ))}
     </Carousel>
   );
+};
+
+CarouselComponent.propTypes = {
+  menuData: PropTypes.shape({
+    sections: PropTypes.array,
+  }),
+  handleItemClick: PropTypes.func.isRequired,
+  selectedItemId: PropTypes.string,
 };
 
 export default CarouselComponent;

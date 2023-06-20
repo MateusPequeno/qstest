@@ -1,38 +1,20 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
-
 export const SearchBarDiv = styled.div`
   width: 80%;
   background-color: ${(props) => `${props.theme.backgroundColour}`};
-
   padding: 6px;
   @media (max-width: 768px) {
     padding: 16px 16px 16px 16px;
     width: 90%;
   }
 `;
-export const WrapDiv = styled.div`
-  width: 80%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-`;
-
-export const CartContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const MainContentDiv = styled.div`
-  padding: 20px;
-`;
-
 export const FullScreenDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-
   background-color: ${(props) => `${props.theme.backgroundColour}`};
 `;
 
@@ -52,40 +34,6 @@ export const WhiteBackgroundDiv = styled.div`
     flex-direction: column;
     padding: 0px;
   }
-`;
-
-export const DescriptionText = styled.text`
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 19px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-export const ItemNameText = styled.text`
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 19px;
-`;
-export const PriceText = styled.text`
-  padding-top: 4px;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: 0.5px;
-`;
-export const ColapserDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 16px 12px;
 `;
 
 export const MenuItemImage = styled.img`

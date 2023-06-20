@@ -1,4 +1,5 @@
-import { createContext,  useState } from "react";
+import { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export const BasketContext = createContext(null);
 
@@ -22,3 +23,7 @@ export function BasketProvider({ children }) {
     </BasketContext.Provider>
   );
 }
+
+BasketProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

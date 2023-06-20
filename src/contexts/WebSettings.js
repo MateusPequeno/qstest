@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { apiRestaurant } from "services";
+import PropTypes from "prop-types";
 
 export const WebSettingsContext = createContext();
 
@@ -26,3 +27,7 @@ export function WebSettingsProvider({ children }) {
     </WebSettingsContext.Provider>
   );
 }
+
+WebSettingsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

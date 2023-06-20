@@ -1,4 +1,10 @@
 import React, { useContext } from "react";
+import { determineWhichPriceToShow } from "utils";
+import PropTypes from "prop-types";
+
+import { MenuItemImage } from "pages/Home/styles";
+import { BasketContext } from "contexts/Basket";
+
 import {
   DescriptionText,
   ItemNameText,
@@ -10,12 +16,9 @@ import {
   PriceText,
   TextAndNumberDiv,
 } from "./styles";
-import { MenuItemImage } from "pages/Home/styles";
-import { determineWhichPriceToShow } from "utils";
-import { BasketContext } from "contexts/Basket";
 
 const MenuItemCard = ({ sectionItem, index, handleMenuItemClick }) => {
-  const { basket, addToBasket } = useContext(BasketContext);
+  const { basket } = useContext(BasketContext);
   return (
     <MenuItemContainer
       key={index.toString()}
@@ -45,5 +48,19 @@ const MenuItemCard = ({ sectionItem, index, handleMenuItemClick }) => {
       )}
     </MenuItemContainer>
   );
+};
+
+MenuItemCard.propTypes = {
+  sectionItem: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string,
+      })
+    ),
+  }),
+  index: PropTypes.number.isRequired,
+  handleMenuItemClick: PropTypes.func.isRequired,
 };
 export default MenuItemCard;

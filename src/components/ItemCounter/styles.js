@@ -1,18 +1,6 @@
 import { styled } from "styled-components";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 
-export const CircleButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: ${(props) => `${props.theme.lightGrayTwo}`};
-  border: ${(props) => `2px solid ${props.theme.lightGrayTwo}`};
-  cursor: pointer;
-`;
-
 export const MinusIcon = styled(AiFillMinusCircle).attrs({
   size: 32,
 })`

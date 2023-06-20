@@ -1,7 +1,8 @@
-import React, { memo } from "react";
-import { ButtonText, FloatingFooter, RoundedButton } from "./styles";
+import React from "react";
+import PropTypes from "prop-types";
 import { useTheme } from "styled-components";
 import CustomButton from "components/CustomButton";
+import { FloatingFooter } from "./styles";
 
 const FloatingFooterButton = ({ buttonText, active, onClick }) => {
   const theme = useTheme();
@@ -17,4 +18,10 @@ const FloatingFooterButton = ({ buttonText, active, onClick }) => {
     </FloatingFooter>
   );
 };
-export default memo(FloatingFooterButton);
+FloatingFooterButton.propTypes = {
+  buttonText: PropTypes.string,
+  active: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+export default FloatingFooterButton;

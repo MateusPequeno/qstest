@@ -10,13 +10,14 @@ export const Header = styled.header`
 
 export const Nav = styled.nav`
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TextButton = styled.button`
   border: none;
-  border-bottom: ${(props) => (props.is_selected === 'true' ? "4px solid white" : "none")};
+  border-bottom: ${(props) =>
+    props.is_selected === "true" ? "4px solid white" : "none"};
   display: flex;
   justify-content: center;
   align-items: center;

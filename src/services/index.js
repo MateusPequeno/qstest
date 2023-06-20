@@ -13,7 +13,6 @@ export const apiRestaurant = {
           },
         }
       );
-      console.log("::getMenuDetails::REQ", req);
       let json = await req.json();
       return json;
     } catch (error) {
@@ -32,7 +31,6 @@ export const apiRestaurant = {
           },
         }
       );
-      console.log("::getBusinessDetails::REQ", req);
       let json = await req.json();
       return json;
     } catch (error) {

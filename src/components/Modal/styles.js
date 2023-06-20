@@ -7,19 +7,16 @@ export const ModalContainer = styled.div`
   right: 0;
   bottom: 0;
   display: flex;
-  //align-items: center;
   justify-content: center;
   overflow: auto;
   scrollbar-width: thin;
   z-index: 1;
   scrollbar-color: transparent transparent;
   background-color: rgba(0, 0, 0, 0.5);
-
   /* Firefox */
   &::-moz-scrollbar {
     width: 0;
   }
-
   /* WebKit */
   &::-webkit-scrollbar {
     width: 0;
@@ -61,17 +58,13 @@ export const CloseButton = styled.button`
   border: none;
   color: ${(props) => props.theme.primaryColour};
   cursor: pointer;
-
   @media (max-width: 768px) {
-    /* Adjust the properties for smaller screens */
     top: 5%;
     right: 20%;
     width: 28px;
     height: 28px;
   }
-
   @media (max-width: 480px) {
-    /* Adjust the properties for even smaller screens */
     top: 3%;
     right: 10%;
     width: 28px;
@@ -135,7 +128,6 @@ export const Card = styled.div`
 
 export const ModifiersCard = styled.div`
   padding: 16px 24px;
-
   background-color: ${(props) => props.theme.white};
   display: flex;
   align-items: center;
@@ -145,7 +137,6 @@ export const ModifiersCard = styled.div`
 
 export const ModifierOptionsCard = styled.div`
   padding: 16px 24px;
-
   background-color: ${(props) => props.theme.grayDefault};
   display: flex;
   align-items: center;
@@ -165,7 +156,6 @@ export const RadioCircle = styled.div`
   border: 3px solid ${(props) => props.theme.primaryColour};
   background-color: ${(props) =>
     props.checked === 'true'? props.theme.primaryColour : props.theme.white};
-
   &::before {
     content: "";
     position: absolute;
@@ -178,6 +168,7 @@ export const RadioCircle = styled.div`
     opacity: ${(props) => (props.checked ? 1 : 0)};
   }
 `;
+
 export const CustomButtonContainer = styled.div`
   display: flex;
   justify-self: center;
@@ -190,4 +181,5 @@ export const FooterDiv = styled.div`
   padding-top: 27px;
   background-color: ${(props) => props.theme.grayDefault};
 `;
+
 export const OptionsDiv = styled.div``;

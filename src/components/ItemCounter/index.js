@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
   Container,
@@ -19,5 +20,10 @@ const ItemCounter = ({ number, onMinusClick, onPlusClick }) => (
     </IconContainer>
   </Container>
 );
+ItemCounter.propTypes = {
+  number: PropTypes.number,
+  onMinusClick: PropTypes.func,
+  onPlusClick: PropTypes.func,
+};
 
 export default ItemCounter;
