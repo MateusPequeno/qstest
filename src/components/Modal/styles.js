@@ -27,7 +27,6 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 480px;
-  height: 720px;
   padding-bottom: 10%;
   padding-top: 3%;
   position: ${(props) => (props.pushtobottom ? "fixed" : "")};
@@ -43,8 +42,8 @@ export const ModalContent = styled.div`
 
 export const CloseButton = styled.button`
   position: absolute;
-  top: 8%;
-  right: 39%;
+  top: 10%;
+  right: 35%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,18 +59,28 @@ export const CloseButton = styled.button`
   cursor: pointer;
   @media (max-width: 768px) {
     top: 5%;
-    right: 20%;
-    width: 28px;
-    height: 28px;
-  }
-  @media (max-width: 480px) {
-    top: 3%;
-    right: 10%;
+    right: 13%;
     width: 28px;
     height: 28px;
   }
 `;
 
+export const CloseButtonAux = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 85%;
+  background-color: ${(props) => props.theme.white};
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12);
+  border: none;
+  color: ${(props) => props.theme.primaryColour};
+  cursor: pointer;
+`;
 export const ModalHeader = styled.text`
   font-family: "Roboto" sans-serif;
   font-style: normal;
@@ -123,7 +132,6 @@ export const Card = styled.div`
   padding: 16px;
   padding-top: 50px;
   background-color: ${(props) => props.theme.white};
-  height: 125px;
 `;
 
 export const ModifiersCard = styled.div`
@@ -155,7 +163,7 @@ export const RadioCircle = styled.div`
   border-radius: 50%;
   border: 3px solid ${(props) => props.theme.primaryColour};
   background-color: ${(props) =>
-    props.checked === 'true'? props.theme.primaryColour : props.theme.white};
+    props.checked === "true" ? props.theme.primaryColour : props.theme.white};
   &::before {
     content: "";
     position: absolute;

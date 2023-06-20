@@ -11,11 +11,17 @@ import {
 
 const ItemCounter = ({ number, onMinusClick, onPlusClick }) => (
   <Container>
-    <IconContainer onClick={() => onMinusClick(number)}>
+    <IconContainer
+      data-testid="minus-button"
+      onClick={() => onMinusClick(number)}
+    >
       <MinusIcon />
     </IconContainer>
     <NumberText>{number}</NumberText>
-    <IconContainer onClick={() => onPlusClick(number)}>
+    <IconContainer
+      data-testid="plus-button"
+      onClick={() => onPlusClick(number)}
+    >
       <PlusIcon />
     </IconContainer>
   </Container>

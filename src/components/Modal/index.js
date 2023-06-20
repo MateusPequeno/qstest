@@ -14,6 +14,7 @@ import CustomButton from "components/CustomButton";
 import {
   Card,
   CloseButton,
+  CloseButtonAux,
   ColumnDiv,
   CustomButtonContainer,
   FooterDiv,
@@ -31,6 +32,7 @@ import {
 } from "./styles";
 
 const Modal = ({ onClose, modalData }) => {
+  const modalHasAImage = modalData?.images?.length > 0;
   const { addToBasket } = useContext(BasketContext);
   const [selectedModifier, setSelectedModifier] = useState(0);
   const [itemQuantity, setItemQuantity] = useState(1);
@@ -53,12 +55,15 @@ const Modal = ({ onClose, modalData }) => {
 
   return (
     <ModalContainer>
-      <ModalContent pushtobottom={modalData?.images?.length > 0 ? false : true}>
-        <CloseButton onClick={onClose}>X</CloseButton>
-        {modalData?.images?.length > 0 && (
+      <ModalContent pushtobottom={modalHasAImage ? false : true}>
+        {modalHasAImage && <CloseButton onClick={onClose}>X</CloseButton>}
+        {modalHasAImage && (
           <ModalImage src={modalData?.images[0]?.image} alt="Modal Image" />
         )}
         <Card>
+          {!modalHasAImage && (
+            <CloseButtonAux onClick={onClose}>X</CloseButtonAux>
+          )}
           <ModalHeader>{modalData?.name}</ModalHeader>
           <ModalDescription>{modalData?.description}</ModalDescription>
         </Card>

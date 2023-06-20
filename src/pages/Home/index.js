@@ -13,7 +13,7 @@ import { apiRestaurant } from "services";
 import { BasketContext } from "contexts/Basket";
 import { WebSettingsContext } from "contexts/WebSettings.js";
 
-import { formatCurrency } from "utils";
+import { calculateTotalPrice } from "utils";
 import {
   MenuContainer,
   SearchBarDiv,
@@ -76,22 +76,7 @@ const Home = () => {
       return updatedBasket;
     });
   };
-  const calculateTotalPrice = (items) => {
-    const totalPrice = items.reduce((accumulator, currentItem) => {
-      let itemPrice = 0;
-      if (currentItem.selectedModifier) {
-        const basePrice = currentItem.price || 0;
-        const modifierPrice = currentItem.selectedModifier.price || 0;
-        itemPrice = (basePrice + modifierPrice) * currentItem.quantity;
-      } else {
-        itemPrice = (currentItem.price || 0) * currentItem.quantity;
-      }
 
-      return accumulator + itemPrice;
-    }, 0);
-
-    return formatCurrency(totalPrice);
-  };
   const totalPrice = calculateTotalPrice(basket);
 
   useEffect(() => {

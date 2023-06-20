@@ -8,7 +8,7 @@ export function formatCurrency(value) {
   // Format the number with thousands separators and currency symbol
   const formattedCurrency =
     "R$" +
-    formattedValue.replace(".", ",").replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+    formattedValue.replace(".", ",").replace(/(\d)(?=(\d{3})+,)/g, "$1.");
 
   return formattedCurrency;
 }
@@ -41,4 +41,22 @@ export const determineButtonActivity = (selectedModifier, modalData) => {
   } else {
     return true;
   }
+};
+
+export const calculateTotalPrice = (items) => {
+  const totalPrice = items.reduce((accumulator, currentItem) => {
+    let itemPrice = 0;
+    if (currentItem.selectedModifier) {
+      const basePrice = currentItem.price || 0;
+      const modifierPrice = currentItem.selectedModifier.price || 0;
+      console.log(itemPrice);
+      itemPrice = (basePrice + modifierPrice) * currentItem.quantity;
+    } else {
+      itemPrice = (currentItem.price || 0) * currentItem.quantity;
+    }
+
+    return accumulator + itemPrice;
+  }, 0);
+
+  return formatCurrency(totalPrice);
 };
