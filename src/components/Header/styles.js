@@ -16,7 +16,7 @@ export const Nav = styled.nav`
 
 export const TextButton = styled.button`
   border: none;
-  border-bottom: ${(props) => (props.isSelected ? "4px solid white" : "none")};
+  border-bottom: ${(props) => (props.is_selected === 'true' ? "4px solid white" : "none")};
   display: flex;
   justify-content: center;
   align-items: center;

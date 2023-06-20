@@ -94,6 +94,7 @@ const Home = () => {
     return formatCurrency(totalPrice);
   };
   const totalPrice = calculateTotalPrice(basket);
+
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
@@ -134,10 +135,9 @@ const Home = () => {
               {menuSection
                 ?.filter((menuSection) => menuSection?.visible === 1)
                 .map((menuSection) => (
-                  <>
+                  <React.Fragment key={menuSection?.id.toString()}>
                     <Colapser
                       menuSection={menuSection}
-                      shouldrotate={arrowIconState}
                       onClick={handleArrowClick}
                     />
                     {menuSection?.items.map((sectionItem, index) => (
@@ -148,7 +148,7 @@ const Home = () => {
                         sectionItem={sectionItem}
                       />
                     ))}
-                  </>
+                  </React.Fragment>
                 ))}
             </MenuContainer>
             <ThinBorderBox>

@@ -11,9 +11,7 @@ import CustomButton from "components/CustomButton";
 
 import {
   Card,
-  ChoicesContainer,
   CloseButton,
-  CloseButtonDiv,
   ColumnDiv,
   CustomButtonContainer,
   FooterDiv,
@@ -71,7 +69,7 @@ const Modal = ({ onClose, modalData }) => {
             </ModifierOptionsCard>
             <OptionsDiv>
               {modifierItem?.items?.map((item, subIndex) => {
-                const isSelected = selectedModifier?.id === item.id;
+                const is_selected = selectedModifier?.id === item.id;
                 return (
                   <ModifiersCard
                     key={subIndex.toString()}
@@ -83,7 +81,7 @@ const Modal = ({ onClose, modalData }) => {
                         {formatCurrency(item?.price)}
                       </ModifierItemSubText>
                     </ColumnDiv>
-                    <RadioCircle checked={isSelected} />
+                    <RadioCircle checked={is_selected.toString()} />
                   </ModifiersCard>
                 );
               })}

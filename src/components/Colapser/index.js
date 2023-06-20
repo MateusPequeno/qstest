@@ -1,13 +1,10 @@
 import React from "react";
 import { ArrowDownIcon, ColapserDiv, ColapserText, IconButton } from "./styles";
 
-const Colapser = ({ menuSection, shouldrotate, onClick }) => (
+const Colapser = ({ menuSection }) => (
   <ColapserDiv>
     <ColapserText>{menuSection?.name}</ColapserText>
-    <IconButton
-      shouldrotate={shouldrotate}
-      onClick={() => onClick(!shouldrotate)}
-    >
+    <IconButton>
       <ArrowDownIcon />
     </IconButton>
   </ColapserDiv>

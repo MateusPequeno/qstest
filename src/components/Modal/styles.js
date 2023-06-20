@@ -128,6 +128,7 @@ export const ModifierItemSubText = styled.text`
 
 export const Card = styled.div`
   padding: 16px;
+  padding-top: 50px;
   background-color: ${(props) => props.theme.white};
   height: 125px;
 `;
@@ -163,7 +164,7 @@ export const RadioCircle = styled.div`
   border-radius: 50%;
   border: 3px solid ${(props) => props.theme.primaryColour};
   background-color: ${(props) =>
-    props.checked ? props.theme.primaryColour : props.theme.white};
+    props.checked === 'true'? props.theme.primaryColour : props.theme.white};
 
   &::before {
     content: "";

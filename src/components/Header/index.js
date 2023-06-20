@@ -31,19 +31,19 @@ const HeaderComponent = ({ bannerImage }) => {
         <Header>
           <Nav>
             <TextButton
-              isSelected={selectedOption === "Menu" ? true : false}
+              is_selected={selectedOption === "Menu" ? 'true' : 'false'}
               onClick={() => setSelectedOption("Menu")}
             >
               <HeaderText>MENU</HeaderText>
             </TextButton>
             <TextButton
-              isSelected={selectedOption === "Enter" ? true : false}
+              is_selected={selectedOption === "Enter" ? 'true' : 'false'}
               onClick={() => setSelectedOption("Enter")}
-            >
+            > 
               <HeaderText>ENTRAR</HeaderText>
             </TextButton>
             <TextButton
-              isSelected={selectedOption === "Contact" ? true : false}
+              is_selected={selectedOption === "Contact" ? 'true' : 'false'}
               onClick={() => setSelectedOption("Contact")}
             >
               <HeaderText>CONTATO</HeaderText>
@@ -54,7 +54,7 @@ const HeaderComponent = ({ bannerImage }) => {
         <HeaderMobile>
           <BackIcon />
           <TextButtonMob
-            isSelected={selectedOption === "Menu" ? true : false}
+            is_selected={selectedOption === "Menu" ? 'true' : 'false'}
             onClick={() => setSelectedOption("Menu")}
           >
             <HeaderText>MENU</HeaderText>

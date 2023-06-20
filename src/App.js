@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { WebSettingsProvider } from "./contexts/WebSettings";
 import { BasketProvider } from "./contexts/Basket";
-import { WebSettingsContext } from "contexts/WebSettings.js";
 import { apiRestaurant } from "services";
 import PublicRoutes from "./routes";
 
 export default function App() {
-  /*  const { setWebSettingsState } = useContext(WebSettingsContext); */
   const [theme, setTheme] = useState({
     lightGray: "#8A94A4",
     gray: "#8A94A4",
