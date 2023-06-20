@@ -35,10 +35,13 @@ $ yarn install or npm install
 $ yarn start or npm start
 
 # Well done, Grill Burger is started!
+
+# For testing
+$ yarn test
 ```
 
 # Process
 <p>This aplication as mentioned before is a white label for a hamburguer restaurant or any kind of restaurant as long as it has a endpoint that returns similar data sctructure as the one it's used on this project.
-  This project lists menu items that can be stored inside a context named basket, any of the menu items displayed to the user can be added to the basket. This aplication also uses Styled Components as a depedency in order to create custom styled components.
+  This project lists menu items that can be stored inside a context named basket, any of the menu items displayed to the user can be added to the basket. This aplication also uses Styled Components as a depedency in order to create custom styled components. There are some tests done with react testing library alongside jest testing library too, if you want to try them out just run yarn test.
 </p>
 <br>
